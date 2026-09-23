@@ -33,7 +33,7 @@ export async function streamImage(
       } catch {
         return;
       }
-      if (event.event === "error" || payload.type === "error") {
+      if (event.event === "error" || payload?.type === "error") {
         sawEvent = true;
         streamError = payload.error?.message || "فشل إنشاء الصورة.";
         return;
