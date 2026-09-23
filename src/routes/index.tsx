@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ChangeEvent, type DragEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type DragEvent, type ReactNode } from "react";
 import {
   ArrowLeft,
   Check,
@@ -199,7 +199,7 @@ function Index() {
             <Field label="وصف المنتج أو أهم مزاياه" hint="اختياري"><Textarea value={details} onChange={(e) => setDetails(e.target.value)} placeholder="مثال: رائحة خشبية هادئة، ثبات طويل، عبوة 100 مل" className="min-h-28 resize-none" /></Field>
             <Field label="النص الإعلاني المطلوب" hint="اختياري"><Input value={copy} onChange={(e) => setCopy(e.target.value)} placeholder="مثال: حضورٌ يبقى" className="h-12" /></Field>
             <fieldset><legend className="mb-2 text-sm font-semibold">لغة النص الإعلاني</legend><div className="grid grid-cols-2 gap-2 rounded-lg bg-muted p-1.5">
-              {([['ar', 'العربية'], ['en', 'English']] as const).map(([value, label]) => <button type="button" key={value} onClick={() => setLanguage(value)} className={`h-11 rounded-md text-sm font-semibold transition-colors ${language === value ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}>{label}</button>)}
+              {([['ar', 'العربية'], ['en', 'English']] as const).map(([value, label]) => <Button type="button" variant={language === value ? "secondary" : "ghost"} key={value} onClick={() => setLanguage(value)} className="h-11">{label}</Button>)}
             </div></fieldset>
             <Button variant="premium" size="xl" className="w-full" disabled={generating} onClick={generateBoth}>{generating ? <LoaderCircle className="animate-spin" /> : <Sparkles />}{generating ? "جاري إنشاء التصاميم..." : "إنشاء صورتين إعلانيتين"}<ArrowLeft className="mr-auto" /></Button>
             <p className="text-center text-xs leading-6 text-muted-foreground">قد يستغرق إنشاء التصميمين بضع دقائق حسب التفاصيل.</p>
@@ -230,7 +230,7 @@ function SectionTitle({ number, title, subtitle }: { number: string; title: stri
   return <div className="mb-5"><div className="flex items-center gap-3"><span className="text-xs font-bold text-muted-foreground">{number}</span><h2 className="text-xl font-bold md:text-2xl">{title}</h2></div><p className="mt-2 text-sm text-muted-foreground">{subtitle}</p></div>;
 }
 
-function Field({ label, hint, children }: { label: string; hint: string; children: React.ReactNode }) {
+function Field({ label, hint, children }: { label: string; hint: string; children: ReactNode }) {
   return <div><div className="mb-2 flex items-center justify-between"><Label className="font-semibold">{label}</Label><span className="text-xs text-muted-foreground">{hint}</span></div>{children}</div>;
 }
 
